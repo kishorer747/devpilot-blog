@@ -48,14 +48,6 @@ exclude:
   - vendor/ruby/
   - README.md
 
-# Social links
-twitter_username: devpilot
-github_username: kishorer747
-
-# SEO
-twitter:
-  card: summary
-
 # Feed
 feed:
   path: atom.xml
