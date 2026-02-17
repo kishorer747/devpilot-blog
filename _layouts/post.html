@@ -56,22 +56,17 @@ layout: default
     <details open>
       <summary class="toc-title">Table of Contents</summary>
       <ul class="toc-list">
-        {% assign toc_content = content %}
-        {% assign h2_blocks = toc_content | split: '<h2' %}
+        {% assign h2_blocks = content | split: '<h2' %}
         {% for block in h2_blocks %}
           {% unless forloop.first %}
             {% assign id_start = block | split: 'id="' %}
             {% if id_start.size > 1 %}
               {% assign id_val = id_start[1] | split: '"' | first %}
-              {% assign title_start = block | split: '>' %}
-              {% assign title_text = title_start[1] | split: '</h2>' | first | strip_html | strip %}
-              <li><a href="#{{ id_val }}">{{ title_text }}</a></li>
-            {% else %}
-              {% assign title_start = block | split: '>' %}
-              {% assign title_text = title_start[1] | split: '</h2>' | first | strip_html | strip %}
+              {% assign after_tag = block | split: '>' %}
+              {% assign raw_title = after_tag[1] | split: '</' | first %}
+              {% assign title_text = raw_title | strip_html | strip %}
               {% if title_text != "" %}
-                {% assign slug = title_text | slugify %}
-                <li><a href="#{{ slug }}">{{ title_text }}</a></li>
+              <li><a href="#{{ id_val }}">{{ title_text }}</a></li>
               {% endif %}
             {% endif %}
           {% endunless %}

@@ -39,6 +39,38 @@
     </div>
   </footer>
 
+  <!-- Heading permalinks (only for h2/h3/h4 with IDs) -->
+  <script>
+    document.querySelectorAll('.post-content h2[id], .post-content h3[id], .post-content h4[id]').forEach(heading => {
+      const link = document.createElement('a');
+      link.className = 'header-link';
+      link.href = '#' + heading.id;
+      link.textContent = '#';
+      link.setAttribute('aria-label', 'Link to ' + heading.textContent);
+      heading.prepend(link);
+    });
+  </script>
+
+  <!-- Image lightbox (click to zoom) -->
+  <script>
+    document.querySelectorAll('.post-content img').forEach(img => {
+      img.addEventListener('click', function(e) {
+        e.preventDefault();
+        const overlay = document.createElement('div');
+        overlay.className = 'lightbox-overlay';
+        const zoomed = document.createElement('img');
+        zoomed.src = this.src;
+        zoomed.alt = this.alt;
+        overlay.appendChild(zoomed);
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', () => overlay.remove());
+        document.addEventListener('keydown', function handler(e) {
+          if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', handler); }
+        });
+      });
+    });
+  </script>
+
   <!-- Mermaid diagram rendering -->
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
