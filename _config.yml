@@ -1,0 +1,61 @@
+# DevPilot Blog - Production Configuration
+# https://blog.devpilot.co.in
+
+title: DevPilot Blog
+description: >-
+  Development velocity engine - building software 10x faster with AI-powered
+  agents, virtual teams, and automated workflows.
+baseurl: ""
+url: "https://blog.devpilot.co.in"
+
+# Author
+author:
+  name: DevPilot Team
+  email: hello@devpilot.dev
+
+# Build settings
+future: false
+markdown: kramdown
+kramdown:
+  auto_ids: true
+  toc_levels: 2..3
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Permalink structure
+permalink: /:year/:month/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "DevPilot Team"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
+# Social links
+twitter_username: devpilot
+github_username: kishorer747
+
+# SEO
+twitter:
+  card: summary
+
+# Feed
+feed:
+  path: atom.xml

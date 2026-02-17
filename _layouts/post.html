@@ -1,0 +1,123 @@
+---
+layout: default
+---
+
+{% assign words = content | number_of_words %}
+{% assign minutes = words | divided_by: 200 %}
+{% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <!-- Back to index -->
+  <nav class="post-breadcrumb">
+    <a href="{{ "/" | relative_url }}">&larr; All posts</a>
+    {% if page.categories.size > 0 %}
+      {% for cat in page.categories %}
+        / <a href="{{ "/categories" | relative_url }}#{{ cat | slugify }}">{{ cat }}</a>
+      {% endfor %}
+    {% endif %}
+  </nav>
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <div class="post-meta-bar">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+      {% if page.author %}
+        <span class="meta-sep">/</span>
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
+        </span>
+      {% endif %}
+      <span class="meta-sep">/</span>
+      <span class="reading-time">{{ minutes }} min read</span>
+      <span class="meta-sep">/</span>
+      <span class="word-count">{{ words }} words</span>
+    </div>
+    {% if page.categories.size > 0 %}
+    <div class="post-categories-bar">
+      {% for cat in page.categories %}
+        <a href="{{ "/categories" | relative_url }}#{{ cat | slugify }}" class="category-badge">{{ cat }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if page.tags.size > 0 %}
+    <div class="post-tags-bar">
+      {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </header>
+
+  <!-- Table of Contents -->
+  {% assign headings = content | split: '<h2' %}
+  {% if headings.size > 2 %}
+  <nav class="toc" aria-label="Table of Contents">
+    <details open>
+      <summary class="toc-title">Table of Contents</summary>
+      <ul class="toc-list">
+        {% assign toc_content = content %}
+        {% assign h2_blocks = toc_content | split: '<h2' %}
+        {% for block in h2_blocks %}
+          {% unless forloop.first %}
+            {% assign id_start = block | split: 'id="' %}
+            {% if id_start.size > 1 %}
+              {% assign id_val = id_start[1] | split: '"' | first %}
+              {% assign title_start = block | split: '>' %}
+              {% assign title_text = title_start[1] | split: '</h2>' | first | strip_html | strip %}
+              <li><a href="#{{ id_val }}">{{ title_text }}</a></li>
+            {% else %}
+              {% assign title_start = block | split: '>' %}
+              {% assign title_text = title_start[1] | split: '</h2>' | first | strip_html | strip %}
+              {% if title_text != "" %}
+                {% assign slug = title_text | slugify %}
+                <li><a href="#{{ slug }}">{{ title_text }}</a></li>
+              {% endif %}
+            {% endif %}
+          {% endunless %}
+        {% endfor %}
+      </ul>
+    </details>
+  </nav>
+  {% endif %}
+
+  <!-- Post Body -->
+  <div class="post-content e-content" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <!-- Tags Footer -->
+  {% if page.tags.size > 0 %}
+  <footer class="post-footer">
+    <div class="post-footer-tags">
+      <strong>Tagged:</strong>
+      {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </footer>
+  {% endif %}
+
+  <!-- Post Navigation (newer / older) -->
+  <nav class="post-nav" aria-label="Post navigation">
+    {% if page.next.url %}
+    <a class="post-nav-item post-nav-prev" href="{{ page.next.url | relative_url }}">
+      <span class="post-nav-label">&larr; Newer</span>
+      <span class="post-nav-title">{{ page.next.title | escape }}</span>
+    </a>
+    {% else %}
+    <span class="post-nav-item post-nav-prev post-nav-empty"></span>
+    {% endif %}
+
+    {% if page.previous.url %}
+    <a class="post-nav-item post-nav-next" href="{{ page.previous.url | relative_url }}">
+      <span class="post-nav-label">Older &rarr;</span>
+      <span class="post-nav-title">{{ page.previous.title | escape }}</span>
+    </a>
+    {% else %}
+    <span class="post-nav-item post-nav-next post-nav-empty"></span>
+    {% endif %}
+  </nav>
+
+  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+</article>

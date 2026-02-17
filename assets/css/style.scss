@@ -1,0 +1,1226 @@
+---
+---
+
+// Variables
+$brand-color: #4169E1;
+$brand-color-light: #6B8DF5;
+$brand-color-dark: #2A4ABD;
+$text-color: #1a1a2e;
+$text-color-light: #555;
+$background-color: #fff;
+$surface-color: #f8f9fb;
+$grey-color: #6b7280;
+$grey-color-light: #e5e7eb;
+$grey-color-dark: #374151;
+$border-color: #e5e7eb;
+$accent-green: #059669;
+$accent-orange: #d97706;
+$accent-red: #dc2626;
+
+$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$mono-font-family: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
+$base-font-size: 16px;
+$base-line-height: 1.65;
+
+$spacing-unit: 30px;
+$content-width: 820px;
+$radius: 8px;
+$radius-sm: 4px;
+
+// Reset
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Base
+html {
+  font-size: $base-font-size;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $base-font-family;
+  line-height: $base-line-height;
+  color: $text-color;
+  background-color: $background-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: $brand-color;
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $brand-color-dark;
+  }
+}
+
+// Layout
+.wrapper {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: 0 $spacing-unit;
+}
+
+// ============================================================
+// Header
+// ============================================================
+.site-header {
+  border-bottom: 1px solid $border-color;
+  padding: $spacing-unit * 0.6 0;
+  background: $background-color;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.site-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: $text-color;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+
+  &:hover {
+    color: $brand-color;
+  }
+}
+
+.site-nav {
+  display: flex;
+  gap: $spacing-unit * 0.7;
+
+  a {
+    color: $grey-color-dark;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+
+    &:hover,
+    &.active {
+      color: $brand-color;
+      border-bottom-color: $brand-color;
+    }
+  }
+}
+
+// ============================================================
+// Page Content
+// ============================================================
+.page-content {
+  padding: $spacing-unit * 1.5 0;
+  min-height: calc(100vh - 200px);
+}
+
+// ============================================================
+// Hero Section (index)
+// ============================================================
+.hero {
+  text-align: center;
+  padding: $spacing-unit * 1.5 0 $spacing-unit;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: $spacing-unit * 1.5;
+}
+
+.hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: $spacing-unit * 0.4;
+  background: linear-gradient(135deg, $brand-color, $brand-color-light);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  color: $grey-color;
+  max-width: 600px;
+  margin: 0 auto $spacing-unit * 0.6;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-unit * 0.4;
+  font-size: 0.9rem;
+  color: $grey-color;
+
+  .stat {
+    font-weight: 600;
+    color: $text-color;
+  }
+
+  .stat-sep {
+    color: $grey-color-light;
+  }
+}
+
+// ============================================================
+// Features Bar
+// ============================================================
+.features-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-unit * 0.3;
+  justify-content: center;
+  margin-bottom: $spacing-unit * 1.5;
+}
+
+.feature-pill {
+  display: inline-block;
+  padding: 6px 16px;
+  background: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $grey-color-dark;
+}
+
+// ============================================================
+// Sections
+// ============================================================
+.section {
+  margin-bottom: $spacing-unit * 1.5;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: $spacing-unit * 0.7;
+  padding-bottom: $spacing-unit * 0.3;
+  border-bottom: 2px solid $brand-color;
+  display: inline-block;
+}
+
+// ============================================================
+// Post Cards (featured)
+// ============================================================
+.post-cards {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-unit * 0.7;
+}
+
+.post-card {
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  padding: $spacing-unit * 0.7;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: $background-color;
+
+  &:hover {
+    border-color: $brand-color-light;
+    box-shadow: 0 2px 12px rgba($brand-color, 0.08);
+  }
+}
+
+.post-card--featured {
+  @extend .post-card;
+}
+
+.post-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-unit * 0.3;
+  font-size: 0.8rem;
+  color: $grey-color;
+  margin-bottom: $spacing-unit * 0.3;
+
+  time {
+    font-weight: 500;
+  }
+}
+
+.post-card-title {
+  font-size: 1.2rem;
+  line-height: 1.35;
+  margin-bottom: $spacing-unit * 0.25;
+
+  a {
+    color: $text-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+.post-card-excerpt {
+  font-size: 0.92rem;
+  color: $text-color-light;
+  line-height: 1.55;
+  margin-bottom: $spacing-unit * 0.3;
+}
+
+.post-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+// ============================================================
+// Post List Compact (remaining posts)
+// ============================================================
+.post-list-compact {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-row {
+  display: flex;
+  align-items: center;
+  gap: $spacing-unit * 0.5;
+  padding: $spacing-unit * 0.3 0;
+  border-bottom: 1px solid $grey-color-light;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  time {
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    color: $grey-color;
+    font-weight: 500;
+    width: 50px;
+  }
+
+  .post-row-title {
+    color: $text-color;
+    font-weight: 500;
+    font-size: 0.95rem;
+    flex: 1;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+// ============================================================
+// Category Badge
+// ============================================================
+.category-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  background: linear-gradient(135deg, $brand-color, $brand-color-light);
+  color: #fff;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.category-badge--sm {
+  padding: 1px 8px;
+  font-size: 0.68rem;
+}
+
+// ============================================================
+// Tags
+// ============================================================
+.tag {
+  display: inline-block;
+  background: $surface-color;
+  border: 1px solid $border-color;
+  padding: 2px 10px;
+  border-radius: $radius-sm;
+  font-size: 0.8rem;
+  color: $grey-color-dark;
+  margin-right: 4px;
+}
+
+.tag-sm {
+  display: inline-block;
+  background: $surface-color;
+  border: 1px solid $border-color;
+  padding: 1px 8px;
+  border-radius: $radius-sm;
+  font-size: 0.72rem;
+  color: $grey-color;
+}
+
+// ============================================================
+// Reading Time
+// ============================================================
+.reading-time {
+  font-size: 0.8rem;
+  color: $grey-color;
+  font-style: italic;
+}
+
+.word-count {
+  font-size: 0.8rem;
+  color: $grey-color;
+}
+
+// ============================================================
+// Two-Column Index Layout
+// ============================================================
+.index-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-unit;
+  margin-bottom: $spacing-unit;
+}
+
+.index-col {
+  margin-bottom: 0;
+}
+
+// ============================================================
+// Category List (index sidebar)
+// ============================================================
+.category-list {
+  list-style: none;
+
+  li {
+    margin-bottom: 2px;
+  }
+
+  a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-unit * 0.25 $spacing-unit * 0.35;
+    border-radius: $radius-sm;
+    color: $text-color;
+    text-decoration: none;
+    transition: background 0.1s ease;
+
+    &:hover {
+      background: $surface-color;
+      color: $brand-color;
+    }
+  }
+
+  .category-name {
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  .category-count {
+    font-size: 0.8rem;
+    color: $grey-color;
+    background: $surface-color;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+}
+
+// ============================================================
+// Tag Cloud
+// ============================================================
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-cloud-item {
+  display: inline-block;
+  padding: 4px 12px;
+  background: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  color: $grey-color-dark;
+  text-decoration: none;
+  transition: background 0.1s ease, border-color 0.1s ease;
+
+  &:hover {
+    background: $brand-color;
+    color: #fff;
+    border-color: $brand-color;
+
+    sup {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  sup {
+    font-size: 0.65rem;
+    color: $grey-color;
+    margin-left: 2px;
+  }
+}
+
+.tag-cloud-item--lg {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 5px 14px;
+}
+
+// ============================================================
+// Archive (index and archive page)
+// ============================================================
+.archive-month {
+  margin-bottom: $spacing-unit * 0.5;
+}
+
+.archive-month-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: $spacing-unit * 0.2;
+}
+
+.archive-month-count {
+  font-size: 0.8rem;
+  color: $grey-color;
+  font-weight: 400;
+}
+
+.archive-list {
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: $spacing-unit * 0.4;
+    padding: $spacing-unit * 0.15 0;
+    font-size: 0.92rem;
+
+    time {
+      flex-shrink: 0;
+      color: $grey-color;
+      font-size: 0.8rem;
+      width: 50px;
+    }
+
+    a {
+      color: $text-color;
+
+      &:hover {
+        color: $brand-color;
+      }
+    }
+  }
+}
+
+.archive-link {
+  margin-top: $spacing-unit * 0.5;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+// ============================================================
+// Subscribe Section
+// ============================================================
+.subscribe-section {
+  text-align: center;
+  padding: $spacing-unit;
+  background: $surface-color;
+  border-radius: $radius;
+  border: 1px solid $border-color;
+
+  p {
+    color: $grey-color;
+    margin-bottom: $spacing-unit * 0.5;
+    font-size: 0.95rem;
+  }
+
+  .section-title {
+    display: block;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: $spacing-unit * 0.3;
+  }
+}
+
+.subscribe-btn {
+  display: inline-block;
+  padding: 10px 28px;
+  background: $brand-color;
+  color: #fff;
+  border-radius: $radius;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: $brand-color-dark;
+    color: #fff;
+  }
+}
+
+// ============================================================
+// Archive Page
+// ============================================================
+.archive-page,
+.categories-page {
+  .page-header {
+    margin-bottom: $spacing-unit * 1.5;
+  }
+
+  .page-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: $spacing-unit * 0.2;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: $grey-color;
+  }
+}
+
+.archive-year {
+  margin-bottom: $spacing-unit * 1.5;
+}
+
+.archive-year-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: $spacing-unit * 0.5;
+  padding-bottom: $spacing-unit * 0.2;
+  border-bottom: 2px solid $border-color;
+}
+
+.archive-year-count {
+  font-size: 0.85rem;
+  color: $grey-color;
+  font-weight: 400;
+}
+
+.archive-posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.archive-entry {
+  display: flex;
+  gap: $spacing-unit * 0.6;
+  padding: $spacing-unit * 0.5 0;
+  border-bottom: 1px solid $grey-color-light;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.archive-entry-date {
+  flex-shrink: 0;
+  width: 60px;
+
+  time {
+    font-size: 0.8rem;
+    color: $grey-color;
+    font-weight: 500;
+  }
+}
+
+.archive-entry-content {
+  flex: 1;
+}
+
+.archive-entry-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+
+  a {
+    color: $text-color;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+.archive-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.archive-entry-excerpt {
+  font-size: 0.88rem;
+  color: $text-color-light;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+// ============================================================
+// Categories Page
+// ============================================================
+.category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: $spacing-unit * 1.5;
+  padding-bottom: $spacing-unit * 0.7;
+  border-bottom: 1px solid $border-color;
+}
+
+.category-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $text-color;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background: $brand-color;
+    color: #fff;
+    border-color: $brand-color;
+
+    .category-nav-count {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+  }
+}
+
+.category-nav-count {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: $grey-color-light;
+  padding: 1px 7px;
+  border-radius: 10px;
+  color: $grey-color;
+}
+
+.category-section {
+  margin-bottom: $spacing-unit * 1.5;
+}
+
+.category-section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-bottom: $spacing-unit * 0.5;
+  padding-bottom: $spacing-unit * 0.2;
+  border-bottom: 2px solid $brand-color;
+}
+
+.category-section-count {
+  font-size: 0.85rem;
+  color: $grey-color;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+.category-posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-post {
+  display: flex;
+  gap: $spacing-unit * 0.6;
+  padding: $spacing-unit * 0.5 0;
+  border-bottom: 1px solid $grey-color-light;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.category-post-date {
+  flex-shrink: 0;
+  width: 90px;
+
+  time {
+    font-size: 0.8rem;
+    color: $grey-color;
+    font-weight: 500;
+  }
+}
+
+.category-post-body {
+  flex: 1;
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+
+    a {
+      color: $text-color;
+
+      &:hover {
+        color: $brand-color;
+      }
+    }
+  }
+}
+
+.category-post-excerpt {
+  font-size: 0.88rem;
+  color: $text-color-light;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.category-post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+// ============================================================
+// Back Link
+// ============================================================
+.back-link {
+  margin-top: $spacing-unit * 1.5;
+  padding-top: $spacing-unit * 0.7;
+  border-top: 1px solid $border-color;
+
+  a {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+}
+
+// ============================================================
+// Post Layout
+// ============================================================
+
+// Breadcrumb
+.post-breadcrumb {
+  font-size: 0.85rem;
+  margin-bottom: $spacing-unit;
+  color: $grey-color;
+
+  a {
+    color: $grey-color;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+// Header
+.post-header {
+  margin-bottom: $spacing-unit;
+}
+
+.post-title {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: $spacing-unit * 0.4;
+}
+
+.post-meta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  color: $grey-color;
+  font-size: 0.85rem;
+  margin-bottom: $spacing-unit * 0.3;
+}
+
+.meta-sep {
+  color: $grey-color-light;
+  margin: 0 4px;
+}
+
+.post-categories-bar {
+  margin-bottom: $spacing-unit * 0.3;
+  display: flex;
+  gap: 6px;
+}
+
+.post-tags-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+// Table of Contents
+.toc {
+  margin-bottom: $spacing-unit;
+  background: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  padding: $spacing-unit * 0.5 $spacing-unit * 0.7;
+}
+
+.toc-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: $text-color;
+  user-select: none;
+
+  &:hover {
+    color: $brand-color;
+  }
+}
+
+.toc-list {
+  list-style: none;
+  margin-top: $spacing-unit * 0.35;
+  padding-left: $spacing-unit * 0.5;
+
+  li {
+    margin-bottom: 4px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 12px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: $grey-color-light;
+    }
+  }
+
+  a {
+    color: $grey-color-dark;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+// Post Content
+.post-content {
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: $spacing-unit * 1.5 0 $spacing-unit * 0.5;
+    padding-bottom: $spacing-unit * 0.2;
+    border-bottom: 1px solid $grey-color-light;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: $spacing-unit 0 $spacing-unit * 0.4;
+  }
+
+  h4 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: $spacing-unit * 0.8 0 $spacing-unit * 0.3;
+  }
+
+  p {
+    margin-bottom: $spacing-unit * 0.55;
+  }
+
+  ul, ol {
+    margin-left: $spacing-unit;
+    margin-bottom: $spacing-unit * 0.55;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: $spacing-unit * 0.6;
+    border-radius: $radius;
+    overflow-x: auto;
+    margin-bottom: $spacing-unit * 0.6;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  code {
+    font-family: $mono-font-family;
+    font-size: 0.88em;
+  }
+
+  p > code,
+  li > code {
+    background: $surface-color;
+    border: 1px solid $border-color;
+    padding: 1px 6px;
+    border-radius: $radius-sm;
+    font-size: 0.85em;
+    color: $brand-color-dark;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $radius;
+  }
+
+  blockquote {
+    border-left: 4px solid $brand-color;
+    padding: $spacing-unit * 0.4 $spacing-unit * 0.6;
+    margin: $spacing-unit * 0.5 0;
+    background: rgba($brand-color, 0.04);
+    border-radius: 0 $radius-sm $radius-sm 0;
+    color: $text-color-light;
+    font-style: italic;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Highlighted sections: Summary, Key Learnings, etc.
+  > h2 + blockquote,
+  > h3 + blockquote {
+    background: rgba($accent-green, 0.06);
+    border-left-color: $accent-green;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: $spacing-unit * 0.6;
+    font-size: 0.9rem;
+
+    th {
+      background: $surface-color;
+      font-weight: 600;
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 2px solid $border-color;
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid $grey-color-light;
+    }
+
+    tr:hover td {
+      background: rgba($brand-color, 0.02);
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid $border-color;
+    margin: $spacing-unit 0;
+  }
+
+  // Key learnings / summary callout boxes
+  // Use with: > **Summary:** ... or > **Key Learnings:** ...
+  blockquote strong {
+    color: $text-color;
+  }
+}
+
+// Post Footer
+.post-footer {
+  margin-top: $spacing-unit;
+  padding-top: $spacing-unit * 0.5;
+  border-top: 1px solid $border-color;
+}
+
+.post-footer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+
+  strong {
+    font-size: 0.85rem;
+    color: $grey-color;
+    margin-right: 4px;
+  }
+}
+
+// Post Navigation (prev / next)
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-unit * 0.5;
+  margin-top: $spacing-unit * 1.2;
+  padding-top: $spacing-unit * 0.8;
+  border-top: 1px solid $border-color;
+}
+
+.post-nav-item {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-unit * 0.5;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    border-color: $brand-color-light;
+    background: rgba($brand-color, 0.02);
+  }
+}
+
+.post-nav-prev {
+  text-align: left;
+}
+
+.post-nav-next {
+  text-align: right;
+}
+
+.post-nav-empty {
+  border-color: transparent;
+
+  &:hover {
+    background: none;
+    border-color: transparent;
+  }
+}
+
+.post-nav-label {
+  font-size: 0.75rem;
+  color: $grey-color;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.post-nav-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $text-color;
+  line-height: 1.35;
+}
+
+// ============================================================
+// Footer
+// ============================================================
+.site-footer {
+  border-top: 1px solid $border-color;
+  padding: $spacing-unit * 0.7 0;
+  text-align: center;
+  color: $grey-color;
+  font-size: 0.85rem;
+
+  p {
+    margin-bottom: 4px;
+  }
+
+  a {
+    color: $grey-color;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
+// ============================================================
+// Responsive
+// ============================================================
+@media (max-width: 700px) {
+  .site-header .wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .site-nav {
+    margin-top: $spacing-unit * 0.3;
+    gap: $spacing-unit * 0.4;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .index-columns {
+    grid-template-columns: 1fr;
+    gap: $spacing-unit * 0.5;
+  }
+
+  .post-title {
+    font-size: 1.6rem;
+  }
+
+  .post-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .post-meta-bar {
+    font-size: 0.78rem;
+  }
+
+  .archive-entry,
+  .category-post {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .archive-entry-date,
+  .category-post-date {
+    width: auto;
+  }
+
+  .features-bar {
+    gap: 6px;
+  }
+
+  .feature-pill {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+  }
+}
+
+// Mermaid diagram containers
+.mermaid {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  overflow-x: auto;
+
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}

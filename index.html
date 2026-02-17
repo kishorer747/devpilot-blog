@@ -1,0 +1,180 @@
+---
+layout: default
+title: Home
+---
+
+<div class="home">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="hero-title">{{ site.title }}</h1>
+    <p class="hero-description">{{ site.description }}</p>
+    <div class="hero-stats">
+      <span class="stat">{{ site.posts | size }} posts</span>
+      <span class="stat-sep">/</span>
+      {% assign all_categories = "" %}
+      {% for post in site.posts %}
+        {% for cat in post.categories %}
+          {% assign all_categories = all_categories | append: cat | append: "," %}
+        {% endfor %}
+      {% endfor %}
+      {% assign cat_array = all_categories | split: "," | uniq | compact %}
+      <span class="stat">{{ cat_array.size }} categories</span>
+      <span class="stat-sep">/</span>
+      {% assign all_tags = "" %}
+      {% for post in site.posts %}
+        {% for tag in post.tags %}
+          {% assign all_tags = all_tags | append: tag | append: "," %}
+        {% endfor %}
+      {% endfor %}
+      {% assign tag_array = all_tags | split: "," | uniq | compact %}
+      <span class="stat">{{ tag_array.size }} tags</span>
+    </div>
+  </section>
+
+  <!-- Features Bar -->
+  <section class="features-bar">
+    <div class="feature-pill">AI-Powered Agents</div>
+    <div class="feature-pill">Content Factory</div>
+    <div class="feature-pill">Sprint Management</div>
+    <div class="feature-pill">Cross-Project Learning</div>
+  </section>
+
+  <!-- Latest Posts (full cards, limit 5) -->
+  {%- if site.posts.size > 0 -%}
+  <section class="section">
+    <h2 class="section-title">Latest Posts</h2>
+    <div class="post-cards">
+      {%- for post in site.posts limit:5 -%}
+      <article class="post-card post-card--featured">
+        <div class="post-card-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          {% if post.categories.size > 0 %}
+            {% for cat in post.categories %}
+              <span class="category-badge">{{ cat }}</span>
+            {% endfor %}
+          {% endif %}
+          {% assign words = post.content | number_of_words %}
+          {% assign minutes = words | divided_by: 200 %}
+          {% if minutes < 1 %}{% assign minutes = 1 %}{% endif %}
+          <span class="reading-time">{{ minutes }} min read</span>
+        </div>
+        <h3 class="post-card-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </h3>
+        {%- if post.excerpt -%}
+          <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
+        {%- endif -%}
+        {% if post.tags.size > 0 %}
+        <div class="post-card-tags">
+          {% for tag in post.tags %}
+            <span class="tag-sm">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <!-- All Posts -->
+  {% if site.posts.size > 5 %}
+  <section class="section">
+    <h2 class="section-title">All Posts</h2>
+    <div class="post-list-compact">
+      {%- for post in site.posts offset:5 -%}
+      <article class="post-row">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d" }}</time>
+        <a href="{{ post.url | relative_url }}" class="post-row-title">{{ post.title | escape }}</a>
+        {% if post.categories.size > 0 %}
+          {% for cat in post.categories %}
+            <span class="category-badge category-badge--sm">{{ cat }}</span>
+          {% endfor %}
+        {% endif %}
+      </article>
+      {%- endfor -%}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Sidebar-style sections in two columns -->
+  <div class="index-columns">
+
+    <!-- Categories -->
+    <section class="section index-col">
+      <h2 class="section-title">Categories</h2>
+      <ul class="category-list">
+        {% assign categories = site.posts | map: "categories" | flatten | compact | uniq | sort_natural %}
+        {% for cat in categories %}
+          {% if cat != "" %}
+          {% assign cat_count = 0 %}
+          {% for post in site.posts %}
+            {% if post.categories contains cat %}
+              {% assign cat_count = cat_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+          <li>
+            <a href="{{ "/categories" | relative_url }}#{{ cat | slugify }}">
+              <span class="category-name">{{ cat }}</span>
+              <span class="category-count">{{ cat_count }}</span>
+            </a>
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- Tag Cloud -->
+    <section class="section index-col">
+      <h2 class="section-title">Tags</h2>
+      <div class="tag-cloud">
+        {% assign tags = site.posts | map: "tags" | flatten | compact | uniq | sort_natural %}
+        {% for tag in tags %}
+          {% if tag != "" %}
+          {% assign tag_count = 0 %}
+          {% for post in site.posts %}
+            {% if post.tags contains tag %}
+              {% assign tag_count = tag_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+          <a href="{{ "/archive" | relative_url }}#tag-{{ tag | slugify }}" class="tag-cloud-item{% if tag_count > 2 %} tag-cloud-item--lg{% endif %}">
+            {{ tag }} <sup>{{ tag_count }}</sup>
+          </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Archive by Month -->
+  <section class="section">
+    <h2 class="section-title">Archive</h2>
+    {% assign postsByMonth = site.posts | group_by_exp: "post", "post.date | date: '%B %Y'" %}
+    {% for month in postsByMonth %}
+    <div class="archive-month">
+      <h3 class="archive-month-title">{{ month.name }} <span class="archive-month-count">({{ month.items | size }})</span></h3>
+      <ul class="archive-list">
+        {% for post in month.items %}
+        <li>
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d" }}</time>
+          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+    <p class="archive-link"><a href="{{ "/archive" | relative_url }}">View full archive &rarr;</a></p>
+  </section>
+
+  <!-- Subscribe -->
+  <section class="section subscribe-section">
+    <h2 class="section-title">Stay Updated</h2>
+    <p>Subscribe to the RSS feed to get notified about new posts.</p>
+    <a href="{{ "/atom.xml" | relative_url }}" class="subscribe-btn">Subscribe via RSS</a>
+  </section>
+
+  {%- else -%}
+    <p>No posts yet. Check back soon!</p>
+  {%- endif -%}
+</div>
